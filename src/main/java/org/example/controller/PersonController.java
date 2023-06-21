@@ -12,8 +12,8 @@ public class PersonController {
         this.personService = personService;
     }
 
-    public void addPerson(String nome, String email, String cargo) {
-        personService.addPerson(nome, email, cargo);
+    public void addPerson(String name, String email, String office) {
+        personService.addPerson(name, email, office);
     }
 
     public List<Person> getAllPeoples() {

@@ -8,6 +8,7 @@ public class Person {
     private String name;
     private String email;
     private String office;
+    private Integer UserId;
 
     public Person(Integer id, String name, String email, String office) {
         this.id = id;

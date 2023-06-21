@@ -1,7 +1,6 @@
 package org.example.repositories;
 
 import org.example.db.DbException;
-import org.example.model.Feedbacks;
 import org.example.model.Person;
 
 import java.sql.*;
@@ -35,15 +34,14 @@ public class PersonRepository {
 
             int rowsAffected = st.executeUpdate();
 
-            if(rowsAffected > 0) {
+            if (rowsAffected > 0) {
                 ResultSet rs = st.getGeneratedKeys();
                 while (rs.next()) {
                     int id = rs.getInt(1);
                     person.setId(id);
                 }
                 rs.close();
-            }
-            else {
+            } else {
                 throw new DbException("No rows affected!");
             }
 
@@ -77,8 +75,8 @@ public class PersonRepository {
     public Person getPeopleById(int id) {
         String sql = "SELECT * FROM collaborators WHERE Id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setInt(1, id);
-                ResultSet resultSet = statement.executeQuery();
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 String name = resultSet.getString("Name");
                 String email = resultSet.getString("Email");
