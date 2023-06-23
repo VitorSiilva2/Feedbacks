@@ -14,4 +14,13 @@ public class UserController {
         userService.addUser(email, password);
 
     }
+
+    public void userLogin(String email, String password) {
+        boolean loginSucces = userService.userLogin(email, password);
+        if (loginSucces){
+            System.out.println("Logado com succeso");
+        } else {
+            System.out.println("Email ou senha invalida");
+        }
+    }
 }

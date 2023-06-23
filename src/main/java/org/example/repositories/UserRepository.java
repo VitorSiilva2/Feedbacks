@@ -48,8 +48,25 @@ public class UserRepository {
 
     }
 
-    public void getUserByEmail (String email){
+    public User findByEmail (String email) {
+        String sql = "SELECT * FROM user WHERE Email = ?";
 
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            int id = resultSet.getInt("Id");
+            String password = resultSet.getString("Password");
+
+            return new User(id, email, password);
+        }
+        resultSet.close();
+
+    } catch (SQLException e) {
+            throw new RuntimeException("Error find user by email");
+        }
+
+        return null;
     }
 
     public void updateUser(User user) {
