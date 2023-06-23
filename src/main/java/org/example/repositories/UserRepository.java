@@ -15,7 +15,7 @@ public class UserRepository {
     }
 
     public void addUser (User user){
-        PreparedStatement st = null;
+        PreparedStatement st;
 
         try {
             st = connection.prepareStatement(

@@ -12,17 +12,19 @@ public class UserService {
     }
 
     public void addUser(String email, String password) {
+        User userExisting = userRepository.findByEmail(email);
+
+        if(userExisting != null) {
+            throw new RuntimeException("Email already registered! ");
+        }
+
         User user = new User(email, password);
         userRepository.addUser(user);
     }
 
     public boolean userLogin(String email, String password) {
         User user = userRepository.findByEmail(email);
-        if(user != null && user.getPassword().equals(password)) {
-            return true;
-        } else {
-            return false;
-        }
+        return user != null && user.getPassword().equals(password);
     }
 
 }
