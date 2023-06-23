@@ -8,19 +8,29 @@ public class Person {
     private String name;
     private String email;
     private String office;
-    private Integer UserId;
+    private Integer userId;
 
-    public Person(Integer id, String name, String email, String office) {
+    public Person(Integer id, String name, String email, String office, Integer userId) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.office = office;
+        this.userId = userId;
     }
 
-    public Person(String name, String email, String office) {
+    public Person(String name, String email, String office, Integer userId) {
         this.name = name;
         this.email = email;
         this.office = office;
+        this.userId = userId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public int getId() {
@@ -77,6 +87,7 @@ public class Person {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", office='" + office + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 }

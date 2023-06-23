@@ -23,14 +23,15 @@ public class PersonRepository {
         try {
             st = connection.prepareStatement(
                     "INSERT INTO collaborators"
-                            + "(Name, Email, Office)"
+                            + "(Name, Email, Office, UserId)"
                             + "VALUES "
-                            + "(?, ?, ?)",
+                            + "(?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
 
             st.setString(1, person.getName());
             st.setString(2, person.getEmail());
             st.setString(3, person.getOffice());
+            st.setInt(4, person.getUserId());
 
             int rowsAffected = st.executeUpdate();
 
@@ -61,8 +62,9 @@ public class PersonRepository {
                 String name = resultSet.getString("Name");
                 String email = resultSet.getString("Email");
                 String office = resultSet.getString("Office");
+                Integer userId = resultSet.getInt("UserId");
 
-                Person person = new Person(id, name, email, office);
+                Person person = new Person(id, name, email, office, userId);
                 people.add(person);
             }
         } catch (SQLException e) {
@@ -81,7 +83,8 @@ public class PersonRepository {
                 String name = resultSet.getString("Name");
                 String email = resultSet.getString("Email");
                 String office = resultSet.getString("Office");
-                return new Person(id, name, email, office);
+                Integer userId = resultSet.getInt("UserId");
+                return new Person(id, name, email, office, userId);
             }
 
             resultSet.close();

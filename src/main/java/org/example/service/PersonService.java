@@ -12,8 +12,8 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public void addPerson(String name, String email, String office) {
-        Person person = new Person(name, email, office);
+    public void addPerson(String name, String email, String office, Integer userId) {
+        Person person = new Person(name, email, office, userId);
         personRepository.addPerson(person);
     }
 
