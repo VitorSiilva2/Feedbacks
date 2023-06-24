@@ -19,7 +19,7 @@ public class Main {
         PersonService personService = new PersonService(personRepository);
         PersonController personController = new PersonController(personService);
 
-        userController.userLogin("vitoralves450@gmail.com", "3115181312@Vi");
+        userController.addUser("camilasilvas@gmail.com", "3115181312@Vi", "Camila");
 
 
     }

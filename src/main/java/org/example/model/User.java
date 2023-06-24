@@ -6,18 +6,35 @@ public class User {
     private Integer id;
     private String email;
     private String password;
+    private String name;
 
     public User(Integer id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
 
-    }
 
-    public User(String email, String password) {
+    }public User(Integer id, String email, String password, String name) {
+        this.id = id;
         this.email = email;
         this.password = password;
+        this.name = name;
 
+    }
+
+    public User(String email, String password, String name) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getId() {
@@ -64,6 +81,7 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", name =' " + name + '\'' +
                 '}';
     }
 }

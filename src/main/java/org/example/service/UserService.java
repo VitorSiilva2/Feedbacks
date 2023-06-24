@@ -11,19 +11,22 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void addUser(String email, String password) {
+    public void addUser(String email, String password, String name) {
         User userExisting = userRepository.findByEmail(email);
 
+        // Verifica se o email já está cadastrado, se sim lança uma exceção.
         if(userExisting != null) {
             throw new RuntimeException("Email already registered! ");
         }
-
-        User user = new User(email, password);
+        // Caso não cria uma conta.
+        User user = new User(email, password, name);
         userRepository.addUser(user);
     }
 
     public boolean userLogin(String email, String password) {
+        // Atraves da função findbyEmail busca o email do usuario.
         User user = userRepository.findByEmail(email);
+        // Busca a senha do Usuario e verifica se é igual.
         return user != null && user.getPassword().equals(password);
     }
 

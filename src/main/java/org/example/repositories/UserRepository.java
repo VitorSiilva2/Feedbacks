@@ -20,12 +20,13 @@ public class UserRepository {
         try {
             st = connection.prepareStatement(
                     "INSERT INTO user"
-                            + "(Email, Password)"
+                            + "(Email, Password, Name)"
                             + "VALUES "
-                            + "(?, ?)",
+                            + "(?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
             st.setString(1, user.getEmail());
             st.setString(2, user.getPassword());
+            st.setString(3, user.getName());
 
             int rowsAffected = st.executeUpdate();
             if (rowsAffected > 0) {
