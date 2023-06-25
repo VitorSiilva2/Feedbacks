@@ -2,6 +2,9 @@ package org.example.service;
 
 import org.example.model.User;
 import org.example.repositories.UserRepository;
+import org.example.util.EmailValidator;
+import org.example.util.PasswordHasher;
+import org.example.util.PasswordVerifier;
 
 public class UserService {
 
@@ -12,22 +15,32 @@ public class UserService {
     }
 
     public void addUser(String email, String password, String name) {
-        User userExisting = userRepository.findByEmail(email);
 
+        if (!EmailValidator.emailValidator(email)) {
+            throw new RuntimeException("Invalid email format! ");
+        }
+        User userExisting = userRepository.findByEmail(email);
         // Verifica se o email já está cadastrado, se sim lança uma exceção.
-        if(userExisting != null) {
+        if (userExisting != null) {
             throw new RuntimeException("Email already registered! ");
         }
+
+
+        String passwordHash = new PasswordHasher().hashPassword(password);
         // Caso não cria uma conta.
-        User user = new User(email, password, name);
+        User user = new User(email, passwordHash, name);
         userRepository.addUser(user);
     }
 
     public boolean userLogin(String email, String password) {
-        // Atraves da função findbyEmail busca o email do usuario.
         User user = userRepository.findByEmail(email);
-        // Busca a senha do Usuario e verifica se é igual.
-        return user != null && user.getPassword().equals(password);
-    }
+        PasswordVerifier passwordVerifier = new PasswordVerifier();
 
+        if (user != null) {
+            // Verifica se a senha fornecida corresponde ao hash armazenado.
+            return passwordVerifier.verifierPassword(password, user.getPassword());
+        } else {
+            return false; // Caso o não encontre o user.
+        }
+    }
 }
