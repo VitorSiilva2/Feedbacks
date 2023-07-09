@@ -1,4 +1,4 @@
-Projeto Java JDBC com CRUD
+Projeto CRUD utilizando a linguagem Java, API JDBC e o banco de dados Mysql.
 
 Este é projeto Java que utiliza o JDBC (Java Database Connectivity) para implementar operações de CRUD (Create, Read, Update, Delete) em um banco de dados (Mysql)
 
